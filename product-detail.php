@@ -508,7 +508,7 @@
 									</div>
 
 									<!--  -->
-									<div class="wrap-dropdown-content bo6 p-t-15 p-b-14 active-dropdown-content">
+									<div class="wrap-dropdown-content bo6 p-t-15 p-b-14">
 										<h5 class="js-toggle-dropdown-content flex-sb-m cs-pointer m-text19 color0-hov trans-0-4">
 											Descrição
 											<i class="down-mark fs-12 color1 fa fa-minus dis-none" aria-hidden="true"></i>

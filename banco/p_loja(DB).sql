@@ -1,13 +1,15 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.5.2
+-- version 4.8.3
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: 05-Out-2018 às 17:08
--- Versão do servidor: 10.1.21-MariaDB
--- PHP Version: 7.1.1
+-- Host: 127.0.0.1
+-- Generation Time: 07-Out-2018 às 20:11
+-- Versão do servidor: 10.1.36-MariaDB
+-- versão do PHP: 7.2.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -87,19 +89,18 @@ CREATE TABLE `contato` (
   `id` int(11) NOT NULL,
   `nome` varchar(300) NOT NULL,
   `assunto` varchar(300) NOT NULL,
-  `numero` int(20) NOT NULL,
+  `numero` varchar(20) NOT NULL,
   `email` varchar(300) NOT NULL,
-  `mensagem` varchar(600) NOT NULL
+  `mensagem` varchar(600) NOT NULL,
+  `hora` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Extraindo dados da tabela `contato`
 --
 
-INSERT INTO `contato` (`id`, `nome`, `assunto`, `numero`, `email`, `mensagem`) VALUES
-(21, 'David', 'testando', 99999999, 'david@gmail.com', 'testandoinhoinho'),
-(22, 'JoÃ£o Carlos', 'reclamaÃ§Ã£o', 2147483647, 'joao@gmail.com', 'seus produtos sÃ£o um lixo!!'),
-(23, 'Manoel Carvalho', 'Compra', 2147483647, 'manoel@gmail.com', 'compra realizada.');
+INSERT INTO `contato` (`id`, `nome`, `assunto`, `numero`, `email`, `mensagem`, `hora`) VALUES
+(44, 'david o.', 'Compra', '4949494949', 'luizdosphp@gmail.com', 'comprei uma blusa', '2018-10-07 15:10:43');
 
 -- --------------------------------------------------------
 
@@ -151,6 +152,32 @@ INSERT INTO `imagem` (`id`, `id_produto`, `imagem`, `imagem2`, `imagem3`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estrutura da tabela `informacoes`
+--
+
+CREATE TABLE `informacoes` (
+  `id` int(11) NOT NULL,
+  `nomeus` varchar(300) CHARACTER SET latin1 NOT NULL,
+  `id_usu` int(11) NOT NULL,
+  `endereco` varchar(200) CHARACTER SET latin1 NOT NULL,
+  `cidade` varchar(300) CHARACTER SET latin1 NOT NULL,
+  `estado` varchar(300) CHARACTER SET latin1 NOT NULL,
+  `pais` varchar(300) CHARACTER SET latin1 NOT NULL,
+  `cep` varchar(10) CHARACTER SET latin1 NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Extraindo dados da tabela `informacoes`
+--
+
+INSERT INTO `informacoes` (`id`, `nomeus`, `id_usu`, `endereco`, `cidade`, `estado`, `pais`, `cep`) VALUES
+(6, 'DAVID OLIVEIRA', 22, 'Rua Dr. Jose Torquato', 'Sao Miguel', 'Rio Grande do Norte', 'Brasil', '59920000'),
+(7, 'DAVID SILVA', 23, 'Rua Projetada', 'Pereiro', 'Ceara', 'Brasil', '63460000'),
+(8, 'DAVID O.', 24, 'Rua Dr. Jose Torquato', 'Joao Pessoa', 'Paraiba', 'Brasil', '59920000');
+
+-- --------------------------------------------------------
+
+--
 -- Estrutura da tabela `notificacoes`
 --
 
@@ -165,9 +192,20 @@ CREATE TABLE `notificacoes` (
 --
 
 INSERT INTO `notificacoes` (`id`, `id_user`, `status`) VALUES
-(9, 21, 0),
-(10, 22, 0),
-(11, 23, 0);
+(32, 44, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `pedidos`
+--
+
+CREATE TABLE `pedidos` (
+  `id` int(11) NOT NULL,
+  `prod` varchar(200) NOT NULL,
+  `preco` float NOT NULL,
+  `comprador` varchar(300) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -250,15 +288,18 @@ CREATE TABLE `usuarios` (
   `id` int(11) NOT NULL,
   `email` varchar(200) NOT NULL,
   `senha` varchar(40) NOT NULL,
-  `nome` varchar(300) NOT NULL
+  `nome` varchar(300) NOT NULL,
+  `urlImg` varchar(40) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Extraindo dados da tabela `usuarios`
 --
 
-INSERT INTO `usuarios` (`id`, `email`, `senha`, `nome`) VALUES
-(4, 'david@gmail.com', '827ccb0eea8a706c4c34a16891f84e7b', 'LUIZ DAVID');
+INSERT INTO `usuarios` (`id`, `email`, `senha`, `nome`, `urlImg`) VALUES
+(22, 'DAVID@GMAIL.COM', '12345', 'DAVID OLIVEIRA', '4c34258db98c84b33a3d651798c178ef.jpg'),
+(23, 'LUIZD@GMAIL.COM', 'qwerty', 'DAVID SILVA', '685f862bd5f0c306053034ded8d0a04d.jpg'),
+(24, 'LUIZDOSPHP@GMAIL.COM', 'dadavi@12', 'DAVID O.', '172db8d9b3bf8d1a15634fede5d568f2.jpg');
 
 --
 -- Indexes for dumped tables
@@ -302,9 +343,23 @@ ALTER TABLE `imagem`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `informacoes`
+--
+ALTER TABLE `informacoes`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `nomeus` (`nomeus`),
+  ADD UNIQUE KEY `id_usu` (`id_usu`);
+
+--
 -- Indexes for table `notificacoes`
 --
 ALTER TABLE `notificacoes`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `pedidos`
+--
+ALTER TABLE `pedidos`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -341,56 +396,80 @@ ALTER TABLE `usuarios`
 --
 ALTER TABLE `cad_cat`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
 --
 -- AUTO_INCREMENT for table `categorias`
 --
 ALTER TABLE `categorias`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+
 --
 -- AUTO_INCREMENT for table `compras`
 --
 ALTER TABLE `compras`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `contato`
 --
 ALTER TABLE `contato`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+
 --
 -- AUTO_INCREMENT for table `cor`
 --
 ALTER TABLE `cor`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+
 --
 -- AUTO_INCREMENT for table `imagem`
 --
 ALTER TABLE `imagem`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+
+--
+-- AUTO_INCREMENT for table `informacoes`
+--
+ALTER TABLE `informacoes`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
 --
 -- AUTO_INCREMENT for table `notificacoes`
 --
 ALTER TABLE `notificacoes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+
+--
+-- AUTO_INCREMENT for table `pedidos`
+--
+ALTER TABLE `pedidos`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `produtos`
 --
 ALTER TABLE `produtos`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
 --
 -- AUTO_INCREMENT for table `size`
 --
 ALTER TABLE `size`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+
 --
 -- AUTO_INCREMENT for table `users_admin`
 --
 ALTER TABLE `users_admin`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
 --
 -- AUTO_INCREMENT for table `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+COMMIT;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

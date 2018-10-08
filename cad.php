@@ -18,6 +18,13 @@ if (isset($_POST['nome']) && isset($_POST['email']) && isset($_POST['senha'])) {
 
 				if ($query_cad) { 
 
+					$sql_id = "SELECT LAST_INSERT_ID()";
+					$query_id = mysqli_query($conexao, $sql_id);
+					$id = mysqli_fetch_row($query_id);
+
+					$sql_info = "INSERT INTO informacoes VALUES (DEFAULT,'".strtoupper($_POST['nome'])."', '".$id[0]."', '', '', '', '', '00000000')";
+					$query_info = mysqli_query($conexao, $sql_info);
+
 					echo "
 					<script> 
 

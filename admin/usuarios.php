@@ -31,6 +31,7 @@
 			<td>#</td>
 			<td>Email</td>
 			<td>Nome</td>
+			<td>Ações</td>
 		</tr>
 	</thead>
 
@@ -45,7 +46,7 @@
 						<td>".$dados['id']."</td>
 						<td>".$dados['email']."</td>
 						<td>".$dados['nome']."</td>
-						<td><a href='id=".$dados['id']."'><i class='fa fa-eye'></i></a> | <a href='apagaU.php?id=".$dados['id']."'><i class='fa fa-trash'></i></a> | <a href='&acao=editar&id=".$dados['id']."'><i class='fa fa-edit'></i></a></td>
+						<td><a href='verU.php?id=".$dados['id']."'><i style='color: green;' class='fa fa-eye'></i></a> | <a href='apagaU.php?id=".$dados['id']."&nome=".$dados['nome']."'><i style='color: red;' class='fa fa-trash'></i></a></td>
 					</tr>";
 				}
 			}

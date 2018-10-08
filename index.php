@@ -16,6 +16,19 @@ if (isset($_GET['opc'])) {
 	} 
 }
 
+if (isset($_GET['acao'])) {
+		if ($_GET['acao'] == 'add') {
+
+			$id = $_GET['id'];
+
+			if (!isset($_SESSION['carrinho'][$id])) {
+				$_SESSION['carrinho'][$id] = 1;
+			}else{
+				$_SESSION['carrinho'][$id] += 1;
+			}
+		}
+	}
+
 ?>
 
 <!DOCTYPE html>
@@ -300,58 +313,58 @@ if (isset($_GET['opc'])) {
 	<section class="slide1">
 		<div class="wrap-slick1">
 			<div class="slick1">
-				<div class="item-slick1 item1-slick1" style="background-image: url(images/master-slide-02.jpg);">
+				<div class="item-slick1 item1-slick1" style="background-image: url(images/banner_m.jpg);">
 					<div class="wrap-content-slide1 sizefull flex-col-c-m p-l-15 p-r-15 p-t-150 p-b-170">
-						<span class="caption1-slide1 m-text1 t-center animated visible-false m-b-15" data-appear="fadeInDown">
-							Women Collection 2018
+						<span style="color: black;" class="caption1-slide1 m-text1 t-center animated visible-false m-b-15" data-appear="fadeInDown">
+							Coleção Masculina 2018
 						</span>
 
-						<h2 class="caption2-slide1 xl-text1 t-center animated visible-false m-b-37" data-appear="fadeInUp">
-							New arrivals
+						<h2 style="color: black;" class="caption2-slide1 xl-text1 t-center animated visible-false m-b-37" data-appear="fadeInUp">
+							Lançamentos
 						</h2>
 
 						<div class="wrap-btn-slide1 w-size1 animated visible-false" data-appear="zoomIn">
 							<!-- Button -->
-							<a href="product.html" class="flex-c-m size2 bo-rad-23 s-text2 bgwhite hov1 trans-0-4">
-								Shop Now
+							<a href="product.php?cat=masculino" class="flex-c-m size2 bo-rad-23 s-text2 bgwhite hov1 trans-0-4">
+								Shopping
 							</a>
 						</div>
 					</div>
 				</div>
 
-				<div class="item-slick1 item2-slick1" style="background-image: url(images/master-slide-03.jpg);">
+				<div class="item-slick1 item2-slick1" style="background-image: url(images/banner_f.jpg);">
 					<div class="wrap-content-slide1 sizefull flex-col-c-m p-l-15 p-r-15 p-t-150 p-b-170">
-						<span class="caption1-slide1 m-text1 t-center animated visible-false m-b-15" data-appear="rollIn">
-							Women Collection 2018
+						<span style="color: black;" class="caption1-slide1 m-text1 t-center animated visible-false m-b-15" data-appear="rollIn">
+							Coleção Feminina 2018
 						</span>
 
-						<h2 class="caption2-slide1 xl-text1 t-center animated visible-false m-b-37" data-appear="lightSpeedIn">
-							New arrivals
+						<h2 style="color: black;" class="caption2-slide1 xl-text1 t-center animated visible-false m-b-37" data-appear="lightSpeedIn">
+							Lançamentos
 						</h2>
 
 						<div class="wrap-btn-slide1 w-size1 animated visible-false" data-appear="slideInUp">
 							<!-- Button -->
-							<a href="product.html" class="flex-c-m size2 bo-rad-23 s-text2 bgwhite hov1 trans-0-4">
-								Shop Now
+							<a href="product.php?cat=feminino" class="flex-c-m size2 bo-rad-23 s-text2 bgwhite hov1 trans-0-4">
+								Shopping
 							</a>
 						</div>
 					</div>
 				</div>
 
-				<div class="item-slick1 item3-slick1" style="background-image: url(images/master-slide-04.jpg);">
+				<div class="item-slick1 item3-slick1" style="background-image: url(images/banner_i.jpg);">
 					<div class="wrap-content-slide1 sizefull flex-col-c-m p-l-15 p-r-15 p-t-150 p-b-170">
 						<span class="caption1-slide1 m-text1 t-center animated visible-false m-b-15" data-appear="rotateInDownLeft">
-							Women Collection 2018
+							Coleção Infantil 2018
 						</span>
 
 						<h2 class="caption2-slide1 xl-text1 t-center animated visible-false m-b-37" data-appear="rotateInUpRight">
-							New arrivals
+							Lançamentos
 						</h2>
 
 						<div class="wrap-btn-slide1 w-size1 animated visible-false" data-appear="rotateIn">
 							<!-- Button -->
-							<a href="product.html" class="flex-c-m size2 bo-rad-23 s-text2 bgwhite hov1 trans-0-4">
-								Shop Now
+							<a href="product.php?cat=infantil" class="flex-c-m size2 bo-rad-23 s-text2 bgwhite hov1 trans-0-4">
+								Shopping
 							</a>
 						</div>
 					</div>
@@ -461,7 +474,7 @@ if (isset($_GET['opc'])) {
 		<div class="container">
 			<div class="sec-title p-b-60">
 				<h3 class="m-text5 t-center">
-					Featured Products
+					Em destaque
 				</h3>
 			</div>
 
@@ -479,7 +492,7 @@ if (isset($_GET['opc'])) {
 							echo '<div class="item-slick2 p-l-15 p-r-15">
 						<!-- Block2 -->
 						<div class="block2">
-							<div class="block2-img wrap-pic-w of-hidden pos-relative block2-labelnew">
+							<div style="width: 230px; height: 230px; cursor: pointer;" class="block2-img wrap-pic-w of-hidden pos-relative">
 								<img src="admin/dist/img/'.$fotos["imagem"].'" alt="IMG-PRODUCT">
 
 								<div class="block2-overlay trans-0-4">
@@ -490,9 +503,7 @@ if (isset($_GET['opc'])) {
 
 									<div class="block2-btn-addcart w-size1 trans-0-4">
 										<!-- Button -->
-										<button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
-											Add to Cart
-										</button>
+										<a class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1" href="?acao=add&id='.$fotos["id"].'">Add ao carrinho</a>
 									</div>
 								</div>
 							</div>

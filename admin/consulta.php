@@ -5,22 +5,6 @@
 	<link rel="stylesheet" type="text/css" href="dist/css/bootstrap.min.css">
 </head>
 
-
-<?php
-
-
-	if (isset($_GET['acao'])) {
-		
-		if ($_GET['acao'] == 'apagar') {
-			require('apagaP.php');
-		}
-
-	}
-
-
-?>
-
-
 <body>
 <br><br>
 <h2 style="margin-left: 50px;">Produtos</h2>
@@ -50,7 +34,7 @@
 						<td>".$dados['categoria']."</td>
 						<td>".$dados['valor']."</td>
 						<td>".$dados['quantidade']."</td>
-						<td><a href='id=".$dados['id']."'><i class='fa fa-eye'></i></a> | <a href='apagaP.php?id=".$dados['id']."'><i class='fa fa-trash'></i></a> | <a href='&acao=editar&id=".$dados['id']."'><i class='fa fa-edit'></i></a></td>
+						<td><a href='?opc=verP&id=".$dados['id_produto']."'><i style='color: green;' class='fa fa-eye'></i></a> | <a href='?opc=apagaP&id=".$dados['id_produto']."'><i style='color: red;' class='fa fa-trash'></i></a> | <a href='?opc=editaP&id=".$dados['id_produto']."'><i class='fa fa-edit'></i></a></td>
 					</tr>";
 				}
 			}

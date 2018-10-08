@@ -13,6 +13,7 @@
 		if (mysqli_num_rows($query_lo) > 0) {
 
 			$_SESSION['nomeu'] = strtoupper($nome["nome"]);
+			$_SESSION['emailu'] = strtoupper($_POST['email_lo']);
 
 			echo "
 			<script> 

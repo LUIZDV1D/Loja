@@ -16,7 +16,7 @@ if ($_SESSION['nomeu']) {
 	$email = $_POST['email'];
 	$msg = $_POST['msg'];
 
-	$sql = "INSERT INTO contato VALUES (DEFAULT, '$nome','$assunto','$num','$email','$msg')";
+	$sql = "INSERT INTO contato VALUES (DEFAULT, '$nome','$assunto','$num','$email','$msg', NOW())";
 	$query = mysqli_query($conexao, $sql);
 
 	$sql2 = "SELECT LAST_INSERT_ID()";
@@ -29,12 +29,12 @@ if ($_SESSION['nomeu']) {
 		$queryC = mysqli_query($conexao, $sqlc);
 
 		echo "<script type='text/javascript'>
-				alert('Mensagem enviada');
+				alert('Mensagem enviada!!');
 				location.href = 'contact.php';
 			 </script>";
 	} else {
 		echo "<script type='text/javascript'>
-				alert('Mensagem não enviada');
+				alert('Mensagem não enviada!!');
 				location.href = 'contact.php';
 			 </script>";
 	}
@@ -55,7 +55,6 @@ if ($_SESSION['nomeu']) {
 				location.href = 'login.php';
 			 </script>";
 }
-
 ?>
 
 
@@ -145,15 +144,15 @@ if ($_SESSION['nomeu']) {
 							</li>
 
 							<li>
-								<a href="product.html">Shop</a>
-							</li>
-
-							<li class="sale-noti">
-								<a href="product.html">Sale</a>
+								<a href="product.php">Shop</a>
 							</li>
 
 							<li>
-								<a href="cart.html">Features</a>
+								<a href="product.php">Comprar</a>
+							</li>
+
+							<li>
+								<a href="cart.php">Carrinho</a>
 							</li>
 
 							<li>
@@ -161,11 +160,11 @@ if ($_SESSION['nomeu']) {
 							</li>
 
 							<li>
-								<a href="about.html">About</a>
+								<a href="about.html">Sobre</a>
 							</li>
 
-							<li>
-								<a href="contact.html">Contact</a>
+							<li class="sale-noti">
+								<a href="contact.php">Contato</a>
 							</li>
 						</ul>
 					</nav>
@@ -258,79 +257,6 @@ if ($_SESSION['nomeu']) {
 					</div>
 				</div>
 			</div>
-		</div>
-
-		<!-- Menu Mobile -->
-		<div class="wrap-side-menu" >
-			<nav class="side-menu">
-				<ul class="main-menu">
-					<li class="item-topbar-mobile p-l-20 p-t-8 p-b-8">
-						<span class="topbar-child1">
-							Free shipping for standard order over $100
-						</span>
-					</li>
-
-					<li class="item-topbar-mobile p-l-20 p-t-8 p-b-8">
-						<div class="topbar-child2-mobile">
-							<span class="topbar-email">
-								fashe@example.com
-							</span>
-
-							<div class="topbar-language rs1-select2">
-								<select class="selection-1" name="time">
-									<option>USD</option>
-									<option>EUR</option>
-								</select>
-							</div>
-						</div>
-					</li>
-
-					<li class="item-topbar-mobile p-l-10">
-						<div class="topbar-social-mobile">
-							<a href="#" class="topbar-social-item fa fa-facebook"></a>
-							<a href="#" class="topbar-social-item fa fa-instagram"></a>
-							<a href="#" class="topbar-social-item fa fa-pinterest-p"></a>
-							<a href="#" class="topbar-social-item fa fa-snapchat-ghost"></a>
-							<a href="#" class="topbar-social-item fa fa-youtube-play"></a>
-						</div>
-					</li>
-
-					<li class="item-menu-mobile">
-						<a href="index.html">Home</a>
-						<ul class="sub-menu">
-							<li><a href="index.html">Homepage V1</a></li>
-							<li><a href="home-02.html">Homepage V2</a></li>
-							<li><a href="home-03.html">Homepage V3</a></li>
-						</ul>
-						<i class="arrow-main-menu fa fa-angle-right" aria-hidden="true"></i>
-					</li>
-
-					<li class="item-menu-mobile">
-						<a href="product.html">Shop</a>
-					</li>
-
-					<li class="item-menu-mobile">
-						<a href="product.html">Sale</a>
-					</li>
-
-					<li class="item-menu-mobile">
-						<a href="cart.html">Features</a>
-					</li>
-
-					<li class="item-menu-mobile">
-						<a href="blog.html">Blog</a>
-					</li>
-
-					<li class="item-menu-mobile">
-						<a href="about.html">About</a>
-					</li>
-
-					<li class="item-menu-mobile">
-						<a href="contact.html">Contact</a>
-					</li>
-				</ul>
-			</nav>
-		</div>
 	</header>
 
 	<!-- Title Page -->
@@ -357,7 +283,7 @@ if ($_SESSION['nomeu']) {
 						</h4>
 
 						<div class="bo4 of-hidden size15 m-b-20">
-							<input required class="sizefull s-text7 p-l-22 p-r-22" type="text" name="nome" placeholder="Seu nome">
+							<input value="<?php echo strtolower($_SESSION['nomeu']); ?>" required class="sizefull s-text7 p-l-22 p-r-22" type="text" name="nome" placeholder="Seu nome">
 						</div>
 
 						<div class="bo4 of-hidden size15 m-b-20">
@@ -370,7 +296,7 @@ if ($_SESSION['nomeu']) {
 						</div>
 
 						<div class="bo4 of-hidden size15 m-b-20">
-							<input required class="sizefull s-text7 p-l-22 p-r-22" type="email" name="email" placeholder="Email">
+							<input value="<?php echo strtolower($_SESSION['emailu']); ?>" required class="sizefull s-text7 p-l-22 p-r-22" type="email" name="email" placeholder="Email">
 						</div>
 
 						<textarea required class="dis-block s-text7 size20 bo4 p-l-22 p-r-22 p-t-13 m-b-20" name="msg" placeholder="Mensagem"></textarea>

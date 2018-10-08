@@ -33,7 +33,7 @@
 						<td>".$dados['numero']."</td>
 						<td>".$dados['email']."</td>
 						<td>".$dados['assunto']."</td>
-						<td><a href='?acao=ver'><i class='fa fa-eye'></i></a> | <a href='?acao=apagar'><i class='fa fa-trash'></i></a> | <a href='?acao=editar'><i class='fa fa-edit'></i></a></td>
+						<td><a href='verM.php?id=".$dados['id']."''><i class='fa fa-eye'></i></a> | <a href='apagaM.php?id=".$dados['id']."'><i style='color: red;' class='fa fa-trash'></i></a></td>
 					</tr>";
 				}
 			}

@@ -2,12 +2,7 @@
    require('config.php');
    session_start();
    if(isset($_SESSION['user'])){
-    
-if (isset($_GET['sair'])) {
-  session_destroy();
-  unlink($_SESSION['user']);
-  header('location:login.php');
-}
+
  $sql = "SELECT * FROM users_admin WHERE usuario ='".$_SESSION['user']."'";
  $query = mysqli_query($conexao, $sql);
 
@@ -16,6 +11,12 @@ if (isset($_GET['sair'])) {
    $email = $dadosUser['email'];
    $imgUser = $dadosUser['urlImg'];
  }
+
+ if (isset($_GET['sair'])) {
+                    session_destroy();
+                    unlink($_SESSION['user']);
+                    header('location:login.php');
+                  }
 } else {
   header('location:login.php');
 }
@@ -39,6 +40,7 @@ if (isset($_GET['sair'])) {
   <!-- Ionicons -->
   <link rel="stylesheet" href="bower_components/Ionicons/css/ionicons.min.css">
   <!-- jvectormap -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
   <link rel="stylesheet" href="bower_components/jvectormap/jquery-jvectormap.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
@@ -57,7 +59,7 @@ if (isset($_GET['sair'])) {
   <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
-<body class="hold-transition skin-blue sidebar-mini">
+<body onload="Intervalo();" class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
 
   <header class="main-header">
@@ -76,27 +78,25 @@ if (isset($_GET['sair'])) {
       <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
         <span class="sr-only">Toggle navigation</span>
       </a>
+
+      <script type="">
+        function Intervalo() {
+            setInterval('Atualiza()', 500);
+        }
+        function Atualiza(){
+            $("#setM").load("mens.php");
+            $("#msg").load("mens2.php");
+        }
+      </script>
+
       <!-- Navbar Right Menu -->
-      <div class="navbar-custom-menu">
+      <div id="setTime" class="navbar-custom-menu">
         <ul class="nav navbar-nav">
           <!-- Messages: style can be found in dropdown.less-->
           <li class="dropdown messages-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <i class="fa fa-envelope-o"></i>
-              <span class="label label-success">
-                <?php
-
-                $sql = "SELECT * FROM notificacoes WHERE status = '0'";
-                $query = mysqli_query($conexao, $sql);
-                $numN = mysqli_num_rows($query);
-
-                if ($numN > 0) {
-                  echo $numN;
-                } else {
-                  echo "0";
-                }
-
-                ?>
+              <span id="setM" class="label label-success">
               </span>
             </a>
             <ul class="dropdown-menu">
@@ -115,31 +115,7 @@ if (isset($_GET['sair'])) {
                 ?> mensagem(ns)</li>
               <li>
                 <!-- inner menu: contains the actual data -->
-                <ul class="menu">
-
-
-                                  <?php
-
-                    $SQL = "SELECT * FROM contato, notificacoes WHERE contato.id = notificacoes.id_user AND notificacoes.status = 0";
-                    $QUERY = mysqli_query($conexao, $SQL);
-
-                    while ($infos = mysqli_fetch_assoc($QUERY)) {
-                      echo "<li>
-                              <a href='#'>
-                                <div class='pull-left'>
-                                  <img src='dist/img/user4-128x128.jpg' class='img-circle' alt='User Image'>
-                                </div>
-                                <h4>
-                                  ".$infos['nome']."
-                                  <small><i class='fa fa-clock-o'></i> 2 days</small>
-                                </h4>
-                                <p>".$infos['mensagem']."</p>
-                              </a>
-                            </li>
-                            ";
-                    }
-
-                  ?>
+                <ul id="msg" class="menu">
                   
 
               <!--              <li>
@@ -157,126 +133,6 @@ if (isset($_GET['sair'])) {
                 </ul>
               </li>
               <li class="footer"><a href="?opc=tmensagens">Ver todas as mensagens</a></li>
-            </ul>
-          </li>
-          <!-- Notifications: style can be found in dropdown.less -->
-          <li class="dropdown notifications-menu">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <i class="fa fa-bell-o"></i>
-              <span class="label label-warning">10</span>
-            </a>
-            <ul class="dropdown-menu">
-              <li class="header">You have 10 notifications</li>
-              <li>
-                <!-- inner menu: contains the actual data -->
-                <ul class="menu">
-                  <li>
-                    <a href="#">
-                      <i class="fa fa-users text-aqua"></i> 5 new members joined today
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <i class="fa fa-warning text-yellow"></i> Very long description here that may not fit into the
-                      page and may cause design problems
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <i class="fa fa-users text-red"></i> 5 new members joined
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <i class="fa fa-shopping-cart text-green"></i> 25 sales made
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <i class="fa fa-user text-red"></i> You changed your username
-                    </a>
-                  </li>
-                </ul>
-              </li>
-              <li class="footer"><a href="#">View all</a></li>
-            </ul>
-          </li>
-          <!-- Tasks: style can be found in dropdown.less -->
-          <li class="dropdown tasks-menu">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <i class="fa fa-flag-o"></i>
-              <span class="label label-danger">9</span>
-            </a>
-            <ul class="dropdown-menu">
-              <li class="header">You have 9 tasks</li>
-              <li>
-                <!-- inner menu: contains the actual data -->
-                <ul class="menu">
-                  <li><!-- Task item -->
-                    <a href="#">
-                      <h3>
-                        Design some buttons
-                        <small class="pull-right">20%</small>
-                      </h3>
-                      <div class="progress xs">
-                        <div class="progress-bar progress-bar-aqua" style="width: 20%" role="progressbar"
-                             aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
-                          <span class="sr-only">20% Complete</span>
-                        </div>
-                      </div>
-                    </a>
-                  </li>
-                  <!-- end task item -->
-                  <li><!-- Task item -->
-                    <a href="#">
-                      <h3>
-                        Create a nice theme
-                        <small class="pull-right">40%</small>
-                      </h3>
-                      <div class="progress xs">
-                        <div class="progress-bar progress-bar-green" style="width: 40%" role="progressbar"
-                             aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
-                          <span class="sr-only">40% Complete</span>
-                        </div>
-                      </div>
-                    </a>
-                  </li>
-                  <!-- end task item -->
-                  <li><!-- Task item -->
-                    <a href="#">
-                      <h3>
-                        Some task I need to do
-                        <small class="pull-right">60%</small>
-                      </h3>
-                      <div class="progress xs">
-                        <div class="progress-bar progress-bar-red" style="width: 60%" role="progressbar"
-                             aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
-                          <span class="sr-only">60% Complete</span>
-                        </div>
-                      </div>
-                    </a>
-                  </li>
-                  <!-- end task item -->
-                  <li><!-- Task item -->
-                    <a href="#">
-                      <h3>
-                        Make beautiful transitions
-                        <small class="pull-right">80%</small>
-                      </h3>
-                      <div class="progress xs">
-                        <div class="progress-bar progress-bar-yellow" style="width: 80%" role="progressbar"
-                             aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
-                          <span class="sr-only">80% Complete</span>
-                        </div>
-                      </div>
-                    </a>
-                  </li>
-                  <!-- end task item -->
-                </ul>
-              </li>
-              <li class="footer">
-                <a href="#">View all tasks</a>
-              </li>
             </ul>
           </li>
           <!-- User Account: style can be found in dropdown.less -->
@@ -346,7 +202,7 @@ if (isset($_GET['sair'])) {
       <!-- search form -->
       <form action="#" method="get" class="sidebar-form">
         <div class="input-group">
-          <input type="text" name="q" class="form-control" placeholder="Search...">
+          <input type="text" name="q" class="form-control" placeholder="Procurar...">
           <span class="input-group-btn">
                 <button type="submit" name="search" id="search-btn" class="btn btn-flat">
                   <i class="fa fa-search"></i>
@@ -358,7 +214,7 @@ if (isset($_GET['sair'])) {
         <ul class="sidebar-menu" data-widget="tree">
         <li class="header">MENU</li>
         <br>
-        <li class="active treeview menu-open">
+        <li class="treeview">
           <a href="#">
             <i style="text-decoration: none;" class="fa fa-circle-o"></i> <span> Produtos</span>
             <span class="pull-right-container">
@@ -370,7 +226,7 @@ if (isset($_GET['sair'])) {
             <li><a href="?opc=consulta"><i class="fa fa-search"></i> Consulta</a></li>
           </ul>
         </li>
-         <li class="active treeview menu-open">
+         <li class="treeview">
           <a href="#">
             <i style="text-decoration: none;" class="fa fa-circle-o"></i> <span> Categorias</span>
             <span class="pull-right-container">
@@ -382,7 +238,7 @@ if (isset($_GET['sair'])) {
             <li><a href="?opc=consulta_cate"><i class="fa fa-search"></i> Consulta</a></li>
           </ul>
         </li>
-        <li class="active treeview menu-open">
+        <li class="treeview">
           <a href="#">
             <i style="text-decoration: none;" class="fa fa-circle-o"></i> <span> Usuários</span>
             <span class="pull-right-container">
@@ -407,7 +263,7 @@ if (isset($_GET['sair'])) {
         <small>Admin</small>
       </h1>
       <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Início</a></li>
+        <li><a href="index.php"><i class="fa fa-dashboard"></i> Início</a></li>
         <li class="active"><?php echo (isset($_GET['opc'])?$_GET['opc']:"Home"); ?></li>
       </ol>
     </section>
@@ -425,6 +281,12 @@ if (isset($_GET['sair'])) {
           include('tmensagens.php');
         } elseif ($_GET['opc'] == 'usuarios') {
           include('usuarios.php');
+        } elseif ($_GET['opc'] == 'apagaP') {
+          require('apagaP.php');
+        } elseif ($_GET['opc'] == 'verP') {
+          include('verP.php');
+        } elseif ($_GET['opc'] == 'editaP') {
+          include('editaP.php');
         }
       } else {
               include('home.php');
