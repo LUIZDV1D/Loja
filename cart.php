@@ -9,6 +9,7 @@ require('config.php');
 
 if ($_SESSION['nomeu']) {
 
+
 	if (isset($_GET['opc'])) {
 		$id = $_GET['id'];
 		if ($_GET['opc'] == 'apaga') {
@@ -17,7 +18,10 @@ if ($_SESSION['nomeu']) {
 			
 		} elseif ($_GET['opc'] == 'up') {
 			$_SESSION['carrinho'][$id] = $_GET['q'];
-		}
+
+			$q = $_SESSION['carrinho'][$id];
+
+		} 
 	} else {
 
 	}
@@ -368,6 +372,7 @@ if ($_SESSION['nomeu']) {
 							<?php
 									$total = 0;
 									$totalP = 0;
+									$q = 0;
 
 									foreach ($_SESSION['carrinho'] as $id => $qnt) {
 
@@ -392,10 +397,13 @@ if ($_SESSION['nomeu']) {
 											<td class="column-2">'.$prods["produto"].'</td>
 											<td class="column-3">R$'.$prods["valor"].'</td>
 											<td class="column-4">
+											<form method="post">
 											<div class="rs2-select2 rs3-select2 bo4 of-hidden w-size16">
-												<select class="selection-2" onchange="Valor('.$prods['id'].')" id="va'.$prods['id'].'">';
+												<select name="qu" class="selection-2" onchange="Valor('.$prods['id'].')" id="va'.$prods['id'].'">';
+
 
 												for ($i=1; $i <= $prods['quantidade'] ; $i++) { 
+													$q = $i;
 												if ($i == $qnt) {
 													echo '<option value="'.$i.'" selected>'.$i.'</option>';
 												} else {
@@ -406,6 +414,7 @@ if ($_SESSION['nomeu']) {
 											echo '
 											</select>
 											</div>
+											</form>
 											</td>
 											<td class="column-5">R$'.$totalP.'</td>
 										</tr>';
@@ -413,6 +422,7 @@ if ($_SESSION['nomeu']) {
 
 										$total += ($prods["valor"]*$qnt);
 
+										$_SESSION['qnt'] = $qnt;
 									}
 								?>
 						</table>
@@ -540,8 +550,19 @@ if ($_SESSION['nomeu']) {
 
 									if ($query_f) {
 
+										$sql_q = "SELECT quantidade FROM produtos WHERE id = '".$id."'";
+										$query_q = mysqli_query($conexao, $sql_q);
+										$quaf = mysqli_fetch_assoc($query_q);
+										
+										$quaff = $quaf['quantidade'] - $_SESSION['qnt'];
+
+										$sql_q = "UPDATE produtos SET quantidade = '".$quaff."' WHERE id = '".$prods['id']."'";
+										$query_q = mysqli_query($conexao, $sql_q);
+										
+
 										unset($_SESSION['va']);
 										unset($_SESSION['carrinho']);
+										unset($_SESSION['qnt']);
 
 										echo "<script>
 											alert('Compra finalizada!!');

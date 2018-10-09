@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 07-Out-2018 às 20:11
+-- Generation Time: 09-Out-2018 às 04:57
 -- Versão do servidor: 10.1.36-MariaDB
 -- versão do PHP: 7.2.10
 
@@ -40,6 +40,8 @@ CREATE TABLE `cad_cat` (
 INSERT INTO `cad_cat` (`id`, `nome_cat`) VALUES
 (9, 'AcessÃ³rios'),
 (10, 'CalÃ§ados'),
+(12, 'calÃ§as'),
+(11, 'camisas'),
 (6, 'feminino'),
 (7, 'infantil'),
 (8, 'juvenil'),
@@ -62,9 +64,8 @@ CREATE TABLE `categorias` (
 --
 
 INSERT INTO `categorias` (`id`, `categoria`, `id_produto`) VALUES
-(28, 'masculino', '1'),
-(29, 'CalÃ§ados', '2'),
-(30, 'masculino', '3');
+(33, 'masculino', '6'),
+(34, 'masculino', '7');
 
 -- --------------------------------------------------------
 
@@ -100,7 +101,7 @@ CREATE TABLE `contato` (
 --
 
 INSERT INTO `contato` (`id`, `nome`, `assunto`, `numero`, `email`, `mensagem`, `hora`) VALUES
-(44, 'david o.', 'Compra', '4949494949', 'luizdosphp@gmail.com', 'comprei uma blusa', '2018-10-07 15:10:43');
+(47, 'david o.', 'Compra', '4949494949', 'luizdosphp@gmail.com', 'Comprei uma camisa da Lacoste', '2018-10-08 16:56:39');
 
 -- --------------------------------------------------------
 
@@ -122,9 +123,8 @@ CREATE TABLE `cor` (
 --
 
 INSERT INTO `cor` (`id`, `id_produto`, `cor`, `cor2`, `cor3`, `cor4`) VALUES
-(16, 1, 'vermelho', 'azul', 'preto', 'verde'),
-(17, 2, 'vermelho', 'azul', 'preto', 'verde'),
-(18, 3, 'vermelho', 'azul', 'preto', 'verde');
+(21, 6, 'vermelho', 'azul', 'preto', 'verde'),
+(22, 7, 'vermelho', 'azul', 'preto', 'verde');
 
 -- --------------------------------------------------------
 
@@ -145,9 +145,8 @@ CREATE TABLE `imagem` (
 --
 
 INSERT INTO `imagem` (`id`, `id_produto`, `imagem`, `imagem2`, `imagem3`) VALUES
-(25, 1, '59d0bb624b3abfc88053982e0263c042.jpg', 'e27836d5f3981133c80ce31356dd384a.jpg', '9e73942307f8484549e40d018aa80e70.jpg'),
-(26, 2, 'cc88df17da569b9895b3b9d2616bc1c4.jpg', '647d882e10e14c78f461be875782deaa.jpg', '8ae9c96b2a87b32a44116444738bed8e.jpg'),
-(27, 3, '106ff40605f22ffddfb007d08ba75d20.jpg', '1c0cc2dbca17b5703cae5d101ad07a5e.jpg', '6a51daf2235d0ed8adec409824401ef3.jpg');
+(30, 6, '927ca17060eb5c15e68fae3b28bd9b81.jpg', '0adcabde0cbee1227e57a1bf4f687fc8.jpg', '01cadef7bcbf5e2d7e5db7eb9cfeeea2.jpg'),
+(31, 7, '7e7b21be55cd48d5b93c3327977423f1.jpg', 'b84a0ab8d68328708c7c205b794e0fdf.jpg', '19938ff89549eb7394a97644c8bf2878.jpg');
 
 -- --------------------------------------------------------
 
@@ -171,9 +170,7 @@ CREATE TABLE `informacoes` (
 --
 
 INSERT INTO `informacoes` (`id`, `nomeus`, `id_usu`, `endereco`, `cidade`, `estado`, `pais`, `cep`) VALUES
-(6, 'DAVID OLIVEIRA', 22, 'Rua Dr. Jose Torquato', 'Sao Miguel', 'Rio Grande do Norte', 'Brasil', '59920000'),
-(7, 'DAVID SILVA', 23, 'Rua Projetada', 'Pereiro', 'Ceara', 'Brasil', '63460000'),
-(8, 'DAVID O.', 24, 'Rua Dr. Jose Torquato', 'Joao Pessoa', 'Paraiba', 'Brasil', '59920000');
+(9, 'DAVID OLIVEIRA', 25, 'Rua Dr. Jose Torquato', 'Sao Miguel', 'Rio Grande do Norte', 'Brasil', '59920000');
 
 -- --------------------------------------------------------
 
@@ -192,7 +189,7 @@ CREATE TABLE `notificacoes` (
 --
 
 INSERT INTO `notificacoes` (`id`, `id_user`, `status`) VALUES
-(32, 44, 0);
+(35, 47, 0);
 
 -- --------------------------------------------------------
 
@@ -202,10 +199,19 @@ INSERT INTO `notificacoes` (`id`, `id_user`, `status`) VALUES
 
 CREATE TABLE `pedidos` (
   `id` int(11) NOT NULL,
-  `prod` varchar(200) NOT NULL,
   `preco` float NOT NULL,
-  `comprador` varchar(300) NOT NULL
+  `comprador` varchar(300) NOT NULL,
+  `data` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `pedidos`
+--
+
+INSERT INTO `pedidos` (`id`, `preco`, `comprador`, `data`) VALUES
+(49, 201.9, 'DAVID SILVA', '2018-10-08 16:47:15'),
+(50, 524.8, 'DAVID SILVA', '2018-10-08 16:52:09'),
+(51, 375, 'DAVID SILVA', '2018-10-08 17:31:27');
 
 -- --------------------------------------------------------
 
@@ -228,9 +234,8 @@ CREATE TABLE `produtos` (
 --
 
 INSERT INTO `produtos` (`id`, `produto`, `imagem`, `quantidade`, `valor`, `categoria`, `descricao`) VALUES
-(1, 'Camisa Polo e dois moletons Dragon Ball ', '59d0bb624b3abfc88053982e0263c042.jpg', 20, 249.9, 'masculino', '100% de qualidade'),
-(2, 'TÃªnis basquete', 'cc88df17da569b9895b3b9d2616bc1c4.jpg', 10, 249.9, 'CalÃ§ados', 'TÃªnis Air Jordan de qualidade'),
-(3, 'Moleton Dragon Ball Z', '106ff40605f22ffddfb007d08ba75d20.jpg', 15, 149.9, 'masculino', '100% topen');
+(6, 'Camisa Polo Lacoste Original Fit Masculina', '927ca17060eb5c15e68fae3b28bd9b81.jpg', 19, 350, 'masculino', 'Massa'),
+(7, 'Camisa Polo', '7e7b21be55cd48d5b93c3327977423f1.jpg', 15, 300, 'masculino', 'massa mesmo');
 
 -- --------------------------------------------------------
 
@@ -252,9 +257,8 @@ CREATE TABLE `size` (
 --
 
 INSERT INTO `size` (`id`, `id_produto`, `tamanho`, `tamanho2`, `tamanho3`, `tamanho4`) VALUES
-(16, 1, 'P', 'M', 'G', 'GG'),
-(17, 2, 'P', 'M', 'G', 'GG'),
-(18, 3, 'P', 'M', 'G', 'GG');
+(21, 6, 'P', 'M', 'G', 'GG'),
+(22, 7, 'P', 'M', 'G', 'GG');
 
 -- --------------------------------------------------------
 
@@ -297,9 +301,7 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`id`, `email`, `senha`, `nome`, `urlImg`) VALUES
-(22, 'DAVID@GMAIL.COM', '12345', 'DAVID OLIVEIRA', '4c34258db98c84b33a3d651798c178ef.jpg'),
-(23, 'LUIZD@GMAIL.COM', 'qwerty', 'DAVID SILVA', '685f862bd5f0c306053034ded8d0a04d.jpg'),
-(24, 'LUIZDOSPHP@GMAIL.COM', 'dadavi@12', 'DAVID O.', '172db8d9b3bf8d1a15634fede5d568f2.jpg');
+(25, 'LUIZDOSPHP@GMAIL.COM', 'dadavi@12', 'DAVID OLIVEIRA', 'a37b57f1a8a397b89ddefffd89e00941.jpg');
 
 --
 -- Indexes for dumped tables
@@ -395,13 +397,13 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT for table `cad_cat`
 --
 ALTER TABLE `cad_cat`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `categorias`
 --
 ALTER TABLE `categorias`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `compras`
@@ -413,49 +415,49 @@ ALTER TABLE `compras`
 -- AUTO_INCREMENT for table `contato`
 --
 ALTER TABLE `contato`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
 -- AUTO_INCREMENT for table `cor`
 --
 ALTER TABLE `cor`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `imagem`
 --
 ALTER TABLE `imagem`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT for table `informacoes`
 --
 ALTER TABLE `informacoes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `notificacoes`
 --
 ALTER TABLE `notificacoes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT for table `pedidos`
 --
 ALTER TABLE `pedidos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
 
 --
 -- AUTO_INCREMENT for table `produtos`
 --
 ALTER TABLE `produtos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `size`
 --
 ALTER TABLE `size`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `users_admin`
@@ -467,7 +469,7 @@ ALTER TABLE `users_admin`
 -- AUTO_INCREMENT for table `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
