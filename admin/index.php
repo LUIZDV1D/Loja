@@ -287,6 +287,8 @@
           include('verP.php');
         } elseif ($_GET['opc'] == 'editaP') {
           include('editaP.php');
+        } elseif ($_GET['opc'] == 'verUs') {
+          include('verUs.php');
         }
       } else {
               include('home.php');

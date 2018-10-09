@@ -13,7 +13,7 @@
 		
 		if ($_GET['acao'] == 'apagar') {
 			require('apagaU.php');
-		}
+		} 
 
 	}
 
@@ -46,7 +46,7 @@
 						<td>".$dados['id']."</td>
 						<td>".$dados['email']."</td>
 						<td>".$dados['nome']."</td>
-						<td><a href='verU.php?id=".$dados['id']."'><i style='color: green;' class='fa fa-eye'></i></a> | <a href='apagaU.php?id=".$dados['id']."&nome=".$dados['nome']."'><i style='color: red;' class='fa fa-trash'></i></a></td>
+						<td><a href='?opc=verUs&id=".$dados['id']."'><i style='color: green;' class='fa fa-eye'></i></a> | <a href='apagaU.php?id=".$dados['id']."&nome=".$dados['nome']."'><i style='color: red;' class='fa fa-trash'></i></a></td>
 					</tr>";
 				}
 			}

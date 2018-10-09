@@ -16,7 +16,7 @@ if ($_SESSION['nomeu']) {
 			unset($_SESSION['carrinho'][$id]);
 			
 		} elseif ($_GET['opc'] == 'up') {
-			$_SESSION['carrinho'][$_GET['id']] = $_GET['valor'];
+			$_SESSION['carrinho'][$id] = $_GET['q'];
 		}
 	} else {
 
@@ -77,21 +77,10 @@ if ($_SESSION['nomeu']) {
 					<a href="#" class="topbar-social-item fa fa-youtube-play"></a>
 				</div>
 
-				<span class="topbar-child1">
-					Free shipping for standard order over $100
-				</span>
-
 				<div class="topbar-child2">
 					<span class="topbar-email">
-						fashe@example.com
+						gamesbrdavi@gmail.com
 					</span>
-
-					<div class="topbar-language rs1-select2">
-						<select class="selection-1" name="time">
-							<option>USD</option>
-							<option>EUR</option>
-						</select>
-					</div>
 				</div>
 			</div>
 
@@ -107,11 +96,6 @@ if ($_SESSION['nomeu']) {
 						<ul class="main_menu">
 							<li>
 								<a href="index.php">Home</a>
-								<ul class="sub_menu">
-									<li><a href="index.php">Homepage V1</a></li>
-									<li><a href="home-02.html">Homepage V2</a></li>
-									<li><a href="home-03.html">Homepage V3</a></li>
-								</ul>
 							</li>
 
 							<li>
@@ -127,10 +111,6 @@ if ($_SESSION['nomeu']) {
 							</li>
 
 							<li>
-								<a href="blog.html">Blog</a>
-							</li>
-
-							<li>
 								<a href="about.html">Sobre</a>
 							</li>
 
@@ -143,21 +123,65 @@ if ($_SESSION['nomeu']) {
 
 				<!-- Header Icon -->
 				<div class="header-icons">
-					<?php
+					<div class="header-wrapicon2">
+						<?php
 
 						if ($_SESSION['nomeu']) {
 							echo '
-								<a href="perfil.php" class="header-wrapicon1 dis-block">
-									<img src="images/icone_user.jpg" class="header-icon1" alt="ICON">
-								</a>';
+								<img src="images/icone_user.jpg" class="header-icon1 js-show-header-dropdown" alt="ICON">';
 						} else {
 							echo '
-								<a href="login.php" class="header-wrapicon1 dis-block">
-									<img src="images/icons/icon-header-01.png" class="header-icon1" alt="ICON">
-								</a>';
+								<img src="images/icons/icon-header-01.png" class="header-icon1 js-show-header-dropdown" alt="ICON">';
 						}
+						?>
 
-					?>
+
+						<!-- Header cart noti -->
+						<div class="header-cart header-dropdown">
+							<ul style="margin-top: -10px;" class="header-cart-wrapitem">
+									<li class="header-cart-item">
+										<a href="perfil.php">Perfil<i class="fa fa-user-circle-o" style=" font-size: 30px; margin-left: 10px; margin-top: -4px;"></i></a>
+									</li>
+								<a href="perfil.php?acao=infos">
+									<li class="header-cart-item">
+										Informações<i class="fa fa-address-card" style=" font-size: 30px; margin-left: 160px;"></i>	
+									</li>
+								</a>
+								<hr>
+								<a href="perfil.php?acao=ped">
+									<li class="header-cart-item">
+										Pedidos<i class="fa fa-list-alt" style=" font-size: 30px; margin-left: 193px;"></i>		
+									</li>
+								</a>
+								<hr>
+								<a href="perfil.php?acao=config">
+									<li class="header-cart-item">
+										Configurações<i class="fa fa-cogs" style=" font-size: 30px; margin-left: 144px;"></i>		
+									</li>
+								</a>
+								<hr>
+							</ul>
+							<br>
+
+							<?php
+
+								if ($_SESSION['nomeu']) {
+									echo '
+										<div class="header-cart-buttons">
+								<div style="margin-left: 160px;" class="header-cart-wrapbtn">
+									<!-- Button -->
+									<a href="sair.php" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
+										Sair <i class="fa fa-sign-out"></i>
+									</a>
+								</div>
+							</div>';
+								} else {
+									echo '';
+								}
+
+							?>
+						</div>
+					</div>
 
 					<span class="linedivide1"></span>
 
@@ -335,9 +359,9 @@ if ($_SESSION['nomeu']) {
 
 							<script>
 							function Valor(id){
-								var VALOR = document.getElementById('v'+id).value;
-								valor = parseInt(VALOR);
-								location.href = '?opc=up&valor='+valor+'&id='+id;
+								var quant = document.getElementById('va'+id).value;
+								qua = parseInt(quant);
+								location.href = '?opc=up&q='+qua+'&id='+id;
 							}
 						</script>
 
@@ -369,7 +393,7 @@ if ($_SESSION['nomeu']) {
 											<td class="column-3">R$'.$prods["valor"].'</td>
 											<td class="column-4">
 											<div class="rs2-select2 rs3-select2 bo4 of-hidden w-size16">
-												<select class="selection-2" onchange="Valor('.$prods['id'].')" id="v'.$prods['id'].'">';
+												<select class="selection-2" onchange="Valor('.$prods['id'].')" id="va'.$prods['id'].'">';
 
 												for ($i=1; $i <= $prods['quantidade'] ; $i++) { 
 												if ($i == $qnt) {
@@ -380,8 +404,8 @@ if ($_SESSION['nomeu']) {
 											}
 
 											echo '
-											</div>
 											</select>
+											</div>
 											</td>
 											<td class="column-5">R$'.$totalP.'</td>
 										</tr>';
@@ -565,31 +589,31 @@ if ($_SESSION['nomeu']) {
 
 			<div class="w-size7 p-t-30 p-l-15 p-r-15 respon4">
 				<h4 class="s-text12 p-b-30">
-					Categories
+					Categorias
 				</h4>
 
 				<ul>
 					<li class="p-b-9">
-						<a href="#" class="s-text7">
-							Men
+						<a href="product.php?cat=masculino" class="s-text7">
+							Masculino
 						</a>
 					</li>
 
 					<li class="p-b-9">
-						<a href="#" class="s-text7">
-							Women
+						<a href="product.php?cat=feminino" class="s-text7">
+							Feminino
 						</a>
 					</li>
 
 					<li class="p-b-9">
-						<a href="#" class="s-text7">
-							Dresses
+						<a href="product.php?cat=Acessórios" class="s-text7">
+							Acessórios
 						</a>
 					</li>
 
 					<li class="p-b-9">
-						<a href="#" class="s-text7">
-							Sunglasses
+						<a href="product.php?cat=Calçados" class="s-text7">
+							Calçados
 						</a>
 					</li>
 				</ul>

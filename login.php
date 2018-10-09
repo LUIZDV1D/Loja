@@ -21,7 +21,15 @@
 <html lang="en">
 <head>
 	<title>Login/Cadastro</title>
-	<meta charset="UTF-8">
+	<link rel="stylesheet" type="text/css" href="admin/dist/css/bootstrap.min.css">
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+
+  <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css'>
+
+      <link rel="stylesheet" href="css/style.css">
+
+      <meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->
 	<link rel="icon" type="image/png" href="images/icons/favicon.png"/>
@@ -48,15 +56,7 @@
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="css/util.css">
 	<link rel="stylesheet" type="text/css" href="css/main.css">
-<!--===============================================================================================-->
-
-	<link rel="stylesheet" type="text/css" href="admin/dist/css/bootstrap.min.css">
-
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
-
-  <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css'>
-
-      <link rel="stylesheet" href="css/style.css">
+<!--===============================================================================================-->x
 </head>
 <body class="animsition">
 
@@ -72,22 +72,11 @@
 					<a href="#" class="topbar-social-item fa fa-snapchat-ghost"></a>
 					<a href="#" class="topbar-social-item fa fa-youtube-play"></a>
 				</div>
-
-				<span class="topbar-child1">
-					Free shipping for standard order over $100
-				</span>
-
+				
 				<div class="topbar-child2">
 					<span class="topbar-email">
-						fashe@example.com
+						gamesbrdavi@gmail.com
 					</span>
-
-					<div class="topbar-language rs1-select2">
-						<select class="selection-1" name="time">
-							<option>USD</option>
-							<option>EUR</option>
-						</select>
-					</div>
 				</div>
 			</div>
 
@@ -103,11 +92,6 @@
 						<ul class="main_menu">
 							<li>
 								<a href="index.php">Home</a>
-								<ul class="sub_menu">
-									<li><a href="index.php">Homepage V1</a></li>
-									<li><a href="home-02.html">Homepage V2</a></li>
-									<li><a href="home-03.html">Homepage V3</a></li>
-								</ul>
 							</li>
 
 							<li>
@@ -123,10 +107,6 @@
 							</li>
 
 							<li>
-								<a href="blog.html">Blog</a>
-							</li>
-
-							<li>
 								<a href="about.html">Sobre</a>
 							</li>
 
@@ -139,9 +119,65 @@
 
 				<!-- Header Icon -->
 				<div class="header-icons">
-					<a href="#" class="header-wrapicon1 dis-block">
-						<img src="images/icons/icon-header-01.png" class="header-icon1" alt="ICON">
-					</a>
+					<div class="header-wrapicon2">
+						<?php
+
+						if ($_SESSION['nomeu']) {
+							echo '
+								<img src="images/icone_user.jpg" class="header-icon1 js-show-header-dropdown" alt="ICON">';
+						} else {
+							echo '
+								<img src="images/icons/icon-header-01.png" class="header-icon1 js-show-header-dropdown" alt="ICON">';
+						}
+						?>
+
+
+						<!-- Header cart noti -->
+						<div class="header-cart header-dropdown">
+							<ul style="margin-top: -10px;" class="header-cart-wrapitem">
+									<li class="header-cart-item">
+										<a href="perfil.php">Perfil<i class="fa fa-user-circle-o" style=" font-size: 30px; margin-left: 10px; margin-top: -4px;"></i></a>
+									</li>
+								<a href="perfil.php?acao=infos">
+									<li class="header-cart-item">
+										Informações<i class="fa fa-address-card" style=" font-size: 30px; margin-left: 160px;"></i>	
+									</li>
+								</a>
+								<hr>
+								<a href="perfil.php?acao=ped">
+									<li class="header-cart-item">
+										Pedidos<i class="fa fa-list-alt" style=" font-size: 30px; margin-left: 193px;"></i>		
+									</li>
+								</a>
+								<hr>
+								<a href="perfil.php?acao=config">
+									<li class="header-cart-item">
+										Configurações<i class="fa fa-cogs" style=" font-size: 30px; margin-left: 144px;"></i>		
+									</li>
+								</a>
+								<hr>
+							</ul>
+							<br>
+
+							<?php
+
+								if ($_SESSION['nomeu']) {
+									echo '
+										<div class="header-cart-buttons">
+								<div style="margin-left: 160px;" class="header-cart-wrapbtn">
+									<!-- Button -->
+									<a href="sair.php" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
+										Sair <i class="fa fa-sign-out"></i>
+									</a>
+								</div>
+							</div>';
+								} else {
+									echo '';
+								}
+
+							?>
+						</div>
+					</div>
 
 					<span class="linedivide1"></span>
 

@@ -83,21 +83,10 @@ if (isset($_GET['acao'])) {
 					<a href="#" class="topbar-social-item fa fa-youtube-play"></a>
 				</div>
 
-				<span class="topbar-child1">
-					Free shipping for standard order over $100
-				</span>
-
 				<div class="topbar-child2">
 					<span class="topbar-email">
-						fashe@example.com
+						gamesbrdavi@gmail.com
 					</span>
-
-					<div class="topbar-language rs1-select2">
-						<select class="selection-1" name="time">
-							<option>USD</option>
-							<option>EUR</option>
-						</select>
-					</div>
 				</div>
 			</div>
 
@@ -113,11 +102,6 @@ if (isset($_GET['acao'])) {
 						<ul class="main_menu">
 							<li class="sale-noti">
 								<a href="index.php">Home</a>
-								<ul class="sub_menu">
-									<li><a href="index.php">Homepage V1</a></li>
-									<li><a href="home-02.html">Homepage V2</a></li>
-									<li><a href="home-03.html">Homepage V3</a></li>
-								</ul>
 							</li>
 
 							<li>
@@ -133,10 +117,6 @@ if (isset($_GET['acao'])) {
 							</li>
 
 							<li>
-								<a href="blog.html">Blog</a>
-							</li>
-
-							<li>
 								<a href="about.html">Sobre</a>
 							</li>
 
@@ -149,21 +129,66 @@ if (isset($_GET['acao'])) {
 
 				<!-- Header Icon -->
 				<div class="header-icons">
-					<?php
+					<div class="header-wrapicon2">
+						<?php
 
 						if ($_SESSION['nomeu']) {
 							echo '
-								<a href="perfil.php" class="header-wrapicon1 dis-block">
-									<img src="images/icone_user.jpg" class="header-icon1" alt="ICON">
-								</a>';
+								<img src="images/icone_user.jpg" class="header-icon1 js-show-header-dropdown" alt="ICON">';
 						} else {
 							echo '
-								<a href="login.php" class="header-wrapicon1 dis-block">
-									<img src="images/icons/icon-header-01.png" class="header-icon1" alt="ICON">
-								</a>';
+								<img src="images/icons/icon-header-01.png" class="header-icon1 js-show-header-dropdown" alt="ICON">';
 						}
+						?>
 
-					?>
+
+						<!-- Header cart noti -->
+						<div class="header-cart header-dropdown">
+							<ul style="margin-top: -10px;" class="header-cart-wrapitem">
+									<li class="header-cart-item">
+										<a href="perfil.php">Perfil<i class="fa fa-user-circle-o" style=" font-size: 30px; margin-left: 10px; margin-top: -4px;"></i></a>
+									</li>
+								<a href="perfil.php?acao=infos">
+									<li class="header-cart-item">
+										Informações<i class="fa fa-address-card" style=" font-size: 30px; margin-left: 160px;"></i>	
+									</li>
+								</a>
+								<hr>
+								<a href="perfil.php?acao=ped">
+									<li class="header-cart-item">
+										Pedidos<i class="fa fa-list-alt" style=" font-size: 30px; margin-left: 193px;"></i>		
+									</li>
+								</a>
+								<hr>
+								<a href="perfil.php?acao=config">
+									<li class="header-cart-item">
+										Configurações<i class="fa fa-cogs" style=" font-size: 30px; margin-left: 144px;"></i>		
+									</li>
+								</a>
+								<hr>
+							</ul>
+							<br>
+
+							<?php
+
+								if ($_SESSION['nomeu']) {
+									echo '
+										<div class="header-cart-buttons">
+								<div style="margin-left: 160px;" class="header-cart-wrapbtn">
+									<!-- Button -->
+									<a href="sair.php" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
+										Sair <i class="fa fa-sign-out"></i>
+									</a>
+								</div>
+							</div>';
+								} else {
+									echo '';
+								}
+
+							?>
+		
+						</div>
+					</div>
 
 					<span class="linedivide1"></span>
 
@@ -234,78 +259,6 @@ if (isset($_GET['acao'])) {
 					</div>
 				</div>
 			</div>
-		</div>
-
-		<!-- Menu Mobile -->
-		<div class="wrap-side-menu" >
-			<nav class="side-menu">
-				<ul class="main-menu">
-					<li class="item-topbar-mobile p-l-20 p-t-8 p-b-8">
-						<span class="topbar-child1">
-							Free shipping for standard order over $100
-						</span>
-					</li>
-
-					<li class="item-topbar-mobile p-l-20 p-t-8 p-b-8">
-						<div class="topbar-child2-mobile">
-							<span class="topbar-email">
-								fashe@example.com
-							</span>
-
-							<div class="topbar-language rs1-select2">
-								<select class="selection-1" name="time">
-									<option>USD</option>
-									<option>EUR</option>
-								</select>
-							</div>
-						</div>
-					</li>
-
-					<li class="item-topbar-mobile p-l-10">
-						<div class="topbar-social-mobile">
-							<a href="#" class="topbar-social-item fa fa-facebook"></a>
-							<a href="#" class="topbar-social-item fa fa-instagram"></a>
-							<a href="#" class="topbar-social-item fa fa-pinterest-p"></a>
-							<a href="#" class="topbar-social-item fa fa-snapchat-ghost"></a>
-							<a href="#" class="topbar-social-item fa fa-youtube-play"></a>
-						</div>
-					</li>
-
-					<li class="item-menu-mobile">
-						<a href="index.php">Home</a>
-						<ul class="sub-menu">
-							<li><a href="index.php">Homepage V1</a></li>
-							<li><a href="home-02.html">Homepage V2</a></li>
-							<li><a href="home-03.html">Homepage V3</a></li>
-						</ul>
-						<i class="arrow-main-menu fa fa-angle-right" aria-hidden="true"></i>
-					</li>
-
-					<li class="item-menu-mobile">
-						<a href="product.php">Shop</a>
-					</li>
-
-					<li class="item-menu-mobile">
-						<a href="product.php">Comprar</a>
-					</li>
-
-					<li class="item-menu-mobile">
-						<a href="cart.php">Carrinho</a>
-					</li>
-
-					<li class="item-menu-mobile">
-						<a href="blog.html">Blog</a>
-					</li>
-
-					<li class="item-menu-mobile">
-						<a href="about.html">Sobre</a>
-					</li>
-
-					<li class="item-menu-mobile">
-						<a href="contact.php">Contato</a>
-					</li>
-				</ul>
-			</nav>
 		</div>
 	</header>
 
@@ -385,8 +338,8 @@ if (isset($_GET['acao'])) {
 
 						<div class="block1-wrapbtn w-size2">
 							<!-- Button -->
-							<a href="#" class="flex-c-m size2 m-text2 bg3 hov1 trans-0-4">
-								Dresses
+							<a href="product.php?cat=juvenil" class="flex-c-m size2 m-text2 bg3 hov1 trans-0-4">
+								Juvenil
 							</a>
 						</div>
 					</div>
@@ -411,8 +364,8 @@ if (isset($_GET['acao'])) {
 
 						<div class="block1-wrapbtn w-size2">
 							<!-- Button -->
-							<a href="#" class="flex-c-m size2 m-text2 bg3 hov1 trans-0-4">
-								Watches
+							<a href="product.php?cat=Acessórios" class="flex-c-m size2 m-text2 bg3 hov1 trans-0-4">
+								Acessórios
 							</a>
 						</div>
 					</div>
@@ -423,8 +376,8 @@ if (isset($_GET['acao'])) {
 
 						<div class="block1-wrapbtn w-size2">
 							<!-- Button -->
-							<a href="#" class="flex-c-m size2 m-text2 bg3 hov1 trans-0-4">
-								Footerwear
+							<a href="product.php?cat=infantil" class="flex-c-m size2 m-text2 bg3 hov1 trans-0-4">
+								Infantil
 							</a>
 						</div>
 					</div>
@@ -437,31 +390,21 @@ if (isset($_GET['acao'])) {
 
 						<div class="block1-wrapbtn w-size2">
 							<!-- Button -->
-							<a href="#" class="flex-c-m size2 m-text2 bg3 hov1 trans-0-4">
-								Bags
+							<a href="product.php?cat=Calçados" class="flex-c-m size2 m-text2 bg3 hov1 trans-0-4">
+								Calçados
 							</a>
 						</div>
 					</div>
 
 					<!-- block2 -->
-					<div class="block2 wrap-pic-w pos-relative m-b-30">
-						<img src="images/icons/bg-01.jpg" alt="IMG">
+					<div class="block2 wrap-pic-w hov-img-zoom pos-relative m-b-30">
+						<img src="images/banner-05.jpg" alt="IMG-BENNER">
 
-						<div class="block2-content sizefull ab-t-l flex-col-c-m">
-							<h4 class="m-text4 t-center w-size3 p-b-8">
-								Sign up & get 20% off
-							</h4>
-
-							<p class="t-center w-size4">
-								Be the frist to know about the latest fashion news and get exclu-sive offers
-							</p>
-
-							<div class="w-size2 p-t-25">
-								<!-- Button -->
-								<a href="#" class="flex-c-m size2 bg4 bo-rad-23 hov1 m-text3 trans-0-4">
-									Sign Up
-								</a>
-							</div>
+						<div class="block1-wrapbtn w-size2">
+							<!-- Button -->
+							<a href="product.php?cat=camisas" class="flex-c-m size2 m-text2 bg3 hov1 trans-0-4">
+								Camisas
+							</a>
 						</div>
 					</div>
 				</div>
@@ -526,182 +469,6 @@ if (isset($_GET['acao'])) {
 		</div>
 	</section>
 
-	<!-- Banner2 -->
-	<section class="banner2 bg5 p-t-55 p-b-55">
-		<div class="container">
-			<div class="row">
-				<div class="col-sm-10 col-md-8 col-lg-6 m-l-r-auto p-t-15 p-b-15">
-					<div class="hov-img-zoom pos-relative">
-						<img src="images/banner-08.jpg" alt="IMG-BANNER">
-
-						<div class="ab-t-l sizefull flex-col-c-m p-l-15 p-r-15">
-							<span class="m-text9 p-t-45 fs-20-sm">
-								The Beauty
-							</span>
-
-							<h3 class="l-text1 fs-35-sm">
-								Lookbook
-							</h3>
-
-							<a href="#" class="s-text4 hov2 p-t-20 ">
-								View Collection
-							</a>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-sm-10 col-md-8 col-lg-6 m-l-r-auto p-t-15 p-b-15">
-					<div class="bgwhite hov-img-zoom pos-relative p-b-20per-ssm">
-						<img src="images/shop-item-09.jpg" alt="IMG-BANNER">
-
-						<div class="ab-t-l sizefull flex-col-c-b p-l-15 p-r-15 p-b-20">
-							<div class="t-center">
-								<a href="product-detail.html" class="dis-block s-text3 p-b-5">
-									Gafas sol Hawkers one
-								</a>
-
-								<span class="block2-oldprice m-text7 p-r-5">
-									$29.50
-								</span>
-
-								<span class="block2-newprice m-text8">
-									$15.90
-								</span>
-							</div>
-
-							<div class="flex-c-m p-t-44 p-t-30-xl">
-								<div class="flex-col-c-m size3 bo1 m-l-5 m-r-5">
-									<span class="m-text10 p-b-1 days">
-										69
-									</span>
-
-									<span class="s-text5">
-										days
-									</span>
-								</div>
-
-								<div class="flex-col-c-m size3 bo1 m-l-5 m-r-5">
-									<span class="m-text10 p-b-1 hours">
-										04
-									</span>
-
-									<span class="s-text5">
-										hrs
-									</span>
-								</div>
-
-								<div class="flex-col-c-m size3 bo1 m-l-5 m-r-5">
-									<span class="m-text10 p-b-1 minutes">
-										32
-									</span>
-
-									<span class="s-text5">
-										mins
-									</span>
-								</div>
-
-								<div class="flex-col-c-m size3 bo1 m-l-5 m-r-5">
-									<span class="m-text10 p-b-1 seconds">
-										05
-									</span>
-
-									<span class="s-text5">
-										secs
-									</span>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-
-
-	<!-- Blog -->
-	<section class="blog bgwhite p-t-94 p-b-65">
-		<div class="container">
-			<div class="sec-title p-b-52">
-				<h3 class="m-text5 t-center">
-					Our Blog
-				</h3>
-			</div>
-
-			<div class="row">
-				<div class="col-sm-10 col-md-4 p-b-30 m-l-r-auto">
-					<!-- Block3 -->
-					<div class="block3">
-						<a href="blog-detail.html" class="block3-img dis-block hov-img-zoom">
-							<img src="images/blog-01.jpg" alt="IMG-BLOG">
-						</a>
-
-						<div class="block3-txt p-t-14">
-							<h4 class="p-b-7">
-								<a href="blog-detail.html" class="m-text11">
-									Black Friday Guide: Best Sales & Discount Codes
-								</a>
-							</h4>
-
-							<span class="s-text6">By</span> <span class="s-text7">Nancy Ward</span>
-							<span class="s-text6">on</span> <span class="s-text7">July 22, 2017</span>
-
-							<p class="s-text8 p-t-16">
-								Duis ut velit gravida nibh bibendum commodo. Sus-pendisse pellentesque mattis augue id euismod. Inter-dum et malesuada fames
-							</p>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-sm-10 col-md-4 p-b-30 m-l-r-auto">
-					<!-- Block3 -->
-					<div class="block3">
-						<a href="blog-detail.html" class="block3-img dis-block hov-img-zoom">
-							<img src="images/blog-02.jpg" alt="IMG-BLOG">
-						</a>
-
-						<div class="block3-txt p-t-14">
-							<h4 class="p-b-7">
-								<a href="blog-detail.html" class="m-text11">
-									The White Sneakers Nearly Every Fashion Girls Own
-								</a>
-							</h4>
-
-							<span class="s-text6">By</span> <span class="s-text7">Nancy Ward</span>
-							<span class="s-text6">on</span> <span class="s-text7">July 18, 2017</span>
-
-							<p class="s-text8 p-t-16">
-								Nullam scelerisque, lacus sed consequat laoreet, dui enim iaculis leo, eu viverra ex nulla in tellus. Nullam nec ornare tellus, ac fringilla lacus. Ut sit ame
-							</p>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-sm-10 col-md-4 p-b-30 m-l-r-auto">
-					<!-- Block3 -->
-					<div class="block3">
-						<a href="blog-detail.html" class="block3-img dis-block hov-img-zoom">
-							<img src="images/blog-03.jpg" alt="IMG-BLOG">
-						</a>
-
-						<div class="block3-txt p-t-14">
-							<h4 class="p-b-7">
-								<a href="blog-detail.html" class="m-text11">
-									New York SS 2018 Street Style: Annina Mislin
-								</a>
-							</h4>
-
-							<span class="s-text6">By</span> <span class="s-text7">Nancy Ward</span>
-							<span class="s-text6">on</span> <span class="s-text7">July 2, 2017</span>
-
-							<p class="s-text8 p-t-16">
-								Proin nec vehicula lorem, a efficitur ex. Nam vehicula nulla vel erat tincidunt, sed hendrerit ligula porttitor. Fusce sit amet maximus nunc
-							</p>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
 
 	<!-- Instagram -->
 	<section class="instagram p-t-20">
@@ -885,31 +652,31 @@ if (isset($_GET['acao'])) {
 
 			<div class="w-size7 p-t-30 p-l-15 p-r-15 respon4">
 				<h4 class="s-text12 p-b-30">
-					Categories
+					Categorias
 				</h4>
 
 				<ul>
 					<li class="p-b-9">
-						<a href="#" class="s-text7">
-							Men
+						<a href="product.php?cat=masculino" class="s-text7">
+							Masculino
 						</a>
 					</li>
 
 					<li class="p-b-9">
-						<a href="#" class="s-text7">
-							Women
+						<a href="product.php?cat=feminino" class="s-text7">
+							Feminino
 						</a>
 					</li>
 
 					<li class="p-b-9">
-						<a href="#" class="s-text7">
-							Dresses
+						<a href="product.php?cat=Acessórios" class="s-text7">
+							Acessórios
 						</a>
 					</li>
 
 					<li class="p-b-9">
-						<a href="#" class="s-text7">
-							Sunglasses
+						<a href="product.php?cat=Calçados" class="s-text7">
+							Calçados
 						</a>
 					</li>
 				</ul>
