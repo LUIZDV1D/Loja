@@ -428,7 +428,7 @@ if ($_SESSION['nomeu']) {
 			</div>
 
 			<form method="post">
-				<div class="flex-w flex-sb-m p-t-25 p-b-25 bo8 p-l-35 p-r-60 p-lr-15-sm">
+				<div id="finalizar" class="flex-w flex-sb-m p-t-25 p-b-25 bo8 p-l-35 p-r-60 p-lr-15-sm">
 					<div style="margin-left: 600px;" class="flex-w flex-m w-full-sm">
 						<div class="size11 bo4 m-r-10">
 							<input class="sizefull s-text7 p-l-22 p-r-22" type="text" name="coupon-code" placeholder="Código de cupom">
@@ -516,6 +516,8 @@ if ($_SESSION['nomeu']) {
 
 									echo "Frete: R$".$valor. " Prazo: ".$prazo." dias";
 
+									echo "<script> location.href = '#finalizar'; </script>";
+
 								}
 							?>
 						</span>
@@ -543,7 +545,7 @@ if ($_SESSION['nomeu']) {
 								if ($_GET['opc'] == 'final') {
 							
 								
-										$sql_f = "INSERT INTO pedidos VALUES (DEFAULT, '".$_SESSION['va']."', '".strtoupper($_SESSION['nomeu'])."', NOW())";
+										$sql_f = "INSERT INTO pedidos VALUES (DEFAULT, '".$_SESSION['va']."', '".strtoupper($_SESSION['nomeu'])."', '', NOW())";
 
 										$query_f = mysqli_query($conexao, $sql_f);
 
@@ -554,7 +556,7 @@ if ($_SESSION['nomeu']) {
 
 											echo "<script>
 												alert('Compra finalizada!!');
-												location.href = 'cart.php';
+												location.href = 'gerarCod.php';
 											</script>";
 										} else {
 											echo "<script>

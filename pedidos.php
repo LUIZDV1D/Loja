@@ -36,39 +36,40 @@
 </head>
 <body>
 
-	<div style="margin-left: 100px;" class="container-table-cart pos-relative">
+	<div style="margin-left: 50px;" class="container-table-cart pos-relative">
 				<div class="wrap-table-shopping-cart bgwhite">
 						<table class="table-shopping-cart">
 							<tr  class="table-head">
 								<th class="column-1">COMPRADOR</th>
 								<th class="column-2">DATA/HORA</th>
 								<th class="column-3">VALOR</th>
+								<th class="column-4">CÓD. RASTREAMENTO</th>
+								<th class="column-5">AÇÕES</th>
 							</tr>
 
 							<?php
 															
 								$sql_pe = "SELECT * FROM pedidos WHERE comprador = '".strtoupper($_SESSION['nomeu'])."'";
-
 								$query_pe = mysqli_query($conexao, $sql_pe);
-
 								while ($dados = mysqli_fetch_assoc($query_pe)) {
-
 									$dia = substr($dados['data'], 0,2);
 								$mes = substr($dados['data'], 5,2);
 								$ano = substr($dados['data'], 0,4);
-
-								$hora = substr($dados['data'], 11,19);
-
+								$hora = substr($dados['data'], 11,5);
 								$data = $dia."/".$mes."/".$ano;
-
 									echo '
 									<tr class="table-row">
 								<td class="column-1"><h3>'.strtolower($dados["comprador"]).'</h3></td>
-								<td class="column-2"><h3 style="margin-left: -60px;">'.$data.' - '.$hora.'</h3></td>
-								<td class="column-3"><h3 style="margin-left: -16px;">R$'.$dados["preco"].'</td></h3></td>
+								<td class="column-2"><h3>'.$data.' - '.$hora.'</h3></td>
+								<td class="column-3"><h3>R$'.$dados["preco"].'</td></h3></td>
+								<td class="column-4"><h3>'.$dados["cod"].'</h3></td>
+								<td>
+									<a href="delP.php?comp="'.strtolower($_SESSION["nomeu"]).'><i style="color: red;" class="fa fa-trash"></i></a> |
+									<a href="rastreamento.php"><i style="color: green;" class="fa fa-search"></i></a> 
+								</td>
 							</tr>
 									';
-								}	
+								}
 							?>
 					</table>
 				</div>
