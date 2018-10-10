@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 09-Out-2018 às 04:57
+-- Generation Time: 10-Out-2018 às 22:32
 -- Versão do servidor: 10.1.36-MariaDB
 -- versão do PHP: 7.2.10
 
@@ -45,7 +45,8 @@ INSERT INTO `cad_cat` (`id`, `nome_cat`) VALUES
 (6, 'feminino'),
 (7, 'infantil'),
 (8, 'juvenil'),
-(5, 'masculino');
+(5, 'masculino'),
+(13, 'oculos');
 
 -- --------------------------------------------------------
 
@@ -64,21 +65,7 @@ CREATE TABLE `categorias` (
 --
 
 INSERT INTO `categorias` (`id`, `categoria`, `id_produto`) VALUES
-(33, 'masculino', '6'),
-(34, 'masculino', '7');
-
--- --------------------------------------------------------
-
---
--- Estrutura da tabela `compras`
---
-
-CREATE TABLE `compras` (
-  `id` int(11) NOT NULL,
-  `produto_c` varchar(100) NOT NULL,
-  `valor_c` int(100) NOT NULL,
-  `image` varchar(40) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+(33, 'masculino', '6');
 
 -- --------------------------------------------------------
 
@@ -123,8 +110,20 @@ CREATE TABLE `cor` (
 --
 
 INSERT INTO `cor` (`id`, `id_produto`, `cor`, `cor2`, `cor3`, `cor4`) VALUES
-(21, 6, 'vermelho', 'azul', 'preto', 'verde'),
-(22, 7, 'vermelho', 'azul', 'preto', 'verde');
+(21, 6, 'vermelho', 'azul', 'preto', 'verde');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `desejos`
+--
+
+CREATE TABLE `desejos` (
+  `id` int(11) NOT NULL,
+  `produto_c` varchar(100) NOT NULL,
+  `valor_c` int(100) NOT NULL,
+  `image` varchar(40) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -145,8 +144,7 @@ CREATE TABLE `imagem` (
 --
 
 INSERT INTO `imagem` (`id`, `id_produto`, `imagem`, `imagem2`, `imagem3`) VALUES
-(30, 6, '927ca17060eb5c15e68fae3b28bd9b81.jpg', '0adcabde0cbee1227e57a1bf4f687fc8.jpg', '01cadef7bcbf5e2d7e5db7eb9cfeeea2.jpg'),
-(31, 7, '7e7b21be55cd48d5b93c3327977423f1.jpg', 'b84a0ab8d68328708c7c205b794e0fdf.jpg', '19938ff89549eb7394a97644c8bf2878.jpg');
+(30, 6, '927ca17060eb5c15e68fae3b28bd9b81.jpg', '0adcabde0cbee1227e57a1bf4f687fc8.jpg', '01cadef7bcbf5e2d7e5db7eb9cfeeea2.jpg');
 
 -- --------------------------------------------------------
 
@@ -201,17 +199,9 @@ CREATE TABLE `pedidos` (
   `id` int(11) NOT NULL,
   `preco` float NOT NULL,
   `comprador` varchar(300) NOT NULL,
+  `cod` varchar(40) NOT NULL,
   `data` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Extraindo dados da tabela `pedidos`
---
-
-INSERT INTO `pedidos` (`id`, `preco`, `comprador`, `data`) VALUES
-(49, 201.9, 'DAVID SILVA', '2018-10-08 16:47:15'),
-(50, 524.8, 'DAVID SILVA', '2018-10-08 16:52:09'),
-(51, 375, 'DAVID SILVA', '2018-10-08 17:31:27');
 
 -- --------------------------------------------------------
 
@@ -234,8 +224,7 @@ CREATE TABLE `produtos` (
 --
 
 INSERT INTO `produtos` (`id`, `produto`, `imagem`, `quantidade`, `valor`, `categoria`, `descricao`) VALUES
-(6, 'Camisa Polo Lacoste Original Fit Masculina', '927ca17060eb5c15e68fae3b28bd9b81.jpg', 19, 350, 'masculino', 'Massa'),
-(7, 'Camisa Polo', '7e7b21be55cd48d5b93c3327977423f1.jpg', 15, 300, 'masculino', 'massa mesmo');
+(6, 'Camisa Polo Lacoste Original Fit Masculina', '927ca17060eb5c15e68fae3b28bd9b81.jpg', 20, 350, 'masculino', 'Massa');
 
 -- --------------------------------------------------------
 
@@ -257,8 +246,7 @@ CREATE TABLE `size` (
 --
 
 INSERT INTO `size` (`id`, `id_produto`, `tamanho`, `tamanho2`, `tamanho3`, `tamanho4`) VALUES
-(21, 6, 'P', 'M', 'G', 'GG'),
-(22, 7, 'P', 'M', 'G', 'GG');
+(21, 6, 'P', 'M', 'G', 'GG');
 
 -- --------------------------------------------------------
 
@@ -301,7 +289,7 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`id`, `email`, `senha`, `nome`, `urlImg`) VALUES
-(25, 'LUIZDOSPHP@GMAIL.COM', 'dadavi@12', 'DAVID OLIVEIRA', 'a37b57f1a8a397b89ddefffd89e00941.jpg');
+(25, 'LUIZDOSPHP@GMAIL.COM', '12345', 'DAVID OLIVEIRA', 'a37b57f1a8a397b89ddefffd89e00941.jpg');
 
 --
 -- Indexes for dumped tables
@@ -321,12 +309,6 @@ ALTER TABLE `categorias`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `compras`
---
-ALTER TABLE `compras`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indexes for table `contato`
 --
 ALTER TABLE `contato`
@@ -336,6 +318,12 @@ ALTER TABLE `contato`
 -- Indexes for table `cor`
 --
 ALTER TABLE `cor`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `desejos`
+--
+ALTER TABLE `desejos`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -362,7 +350,8 @@ ALTER TABLE `notificacoes`
 -- Indexes for table `pedidos`
 --
 ALTER TABLE `pedidos`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `cod` (`cod`);
 
 --
 -- Indexes for table `produtos`
@@ -397,19 +386,13 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT for table `cad_cat`
 --
 ALTER TABLE `cad_cat`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `categorias`
 --
 ALTER TABLE `categorias`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
-
---
--- AUTO_INCREMENT for table `compras`
---
-ALTER TABLE `compras`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `contato`
@@ -422,6 +405,12 @@ ALTER TABLE `contato`
 --
 ALTER TABLE `cor`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+
+--
+-- AUTO_INCREMENT for table `desejos`
+--
+ALTER TABLE `desejos`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `imagem`
@@ -445,7 +434,7 @@ ALTER TABLE `notificacoes`
 -- AUTO_INCREMENT for table `pedidos`
 --
 ALTER TABLE `pedidos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `produtos`
