@@ -98,7 +98,7 @@
 								<a href="product.php">Shop</a>
 							</li>
 
-							<li class="sale-noti">
+							<li>
 								<a href="product.php">Comprar</a>
 							</li>
 
@@ -107,7 +107,7 @@
 							</li>
 
 							<li>
-								<a href="about.html">Sobre</a>
+								<a href="about.php">Sobre</a>
 							</li>
 
 							<li>

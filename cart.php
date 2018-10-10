@@ -19,7 +19,7 @@ if ($_SESSION['nomeu']) {
 		} elseif ($_GET['opc'] == 'up') {
 			$_SESSION['carrinho'][$id] = $_GET['q'];
 
-			$q = $_SESSION['carrinho'][$id];
+			unset($_SESSION['va']);
 
 		} 
 	} else {
@@ -115,7 +115,7 @@ if ($_SESSION['nomeu']) {
 							</li>
 
 							<li>
-								<a href="about.html">Sobre</a>
+								<a href="about.php">Sobre</a>
 							</li>
 
 							<li>
@@ -372,7 +372,6 @@ if ($_SESSION['nomeu']) {
 							<?php
 									$total = 0;
 									$totalP = 0;
-									$q = 0;
 
 									foreach ($_SESSION['carrinho'] as $id => $qnt) {
 
@@ -421,8 +420,6 @@ if ($_SESSION['nomeu']) {
 
 
 										$total += ($prods["valor"]*$qnt);
-
-										$_SESSION['qnt'] = $qnt;
 									}
 								?>
 						</table>
@@ -504,6 +501,7 @@ if ($_SESSION['nomeu']) {
 							<?php
 
 								if (isset($_POST['cep']) && isset($_POST['tipo'])) {
+									
 									$url = "http://ws.correios.com.br/calculador/CalcPrecoPrazo.aspx?nCdEmpresa=08082650&sDsSenha=564321&sCepOrigem=59920000&sCepDestino=".$_POST['cep']."&nVlPeso=1&nCdFormato=1&nVlComprimento=20&nVlAltura=20&nVlLargura=20&sCdMaoPropria=n&nVlValorDeclarado=0&sCdAvisoRecebimento=n&nCdServico=".$_POST['tipo']."&nVlDiametro=0&StrRetorno=xml&nIndicaCalculo=3";
 
 									$xml = simplexml_load_file($url);
@@ -514,7 +512,7 @@ if ($_SESSION['nomeu']) {
 
 									$v = $valor+$total;
 
-									$_SESSION['va'] = $v;
+									$_SESSION['va'] = $v;	
 
 									echo "Frete: R$".$valor. " Prazo: ".$prazo." dias";
 
@@ -543,37 +541,27 @@ if ($_SESSION['nomeu']) {
 							<?php
 
 								if ($_GET['opc'] == 'final') {
+							
 								
-									$sql_f = "INSERT INTO pedidos VALUES (DEFAULT, '".$_SESSION['va']."', '".strtoupper($_SESSION['nomeu'])."', NOW())";
+										$sql_f = "INSERT INTO pedidos VALUES (DEFAULT, '".$_SESSION['va']."', '".strtoupper($_SESSION['nomeu'])."', NOW())";
 
-									$query_f = mysqli_query($conexao, $sql_f);
+										$query_f = mysqli_query($conexao, $sql_f);
 
-									if ($query_f) {
+										if ($query_f) {
 
-										$sql_q = "SELECT quantidade FROM produtos WHERE id = '".$id."'";
-										$query_q = mysqli_query($conexao, $sql_q);
-										$quaf = mysqli_fetch_assoc($query_q);
-										
-										$quaff = $quaf['quantidade'] - $_SESSION['qnt'];
+											unset($_SESSION['va']);
+											unset($_SESSION['carrinho']);
 
-										$sql_q = "UPDATE produtos SET quantidade = '".$quaff."' WHERE id = '".$prods['id']."'";
-										$query_q = mysqli_query($conexao, $sql_q);
-										
-
-										unset($_SESSION['va']);
-										unset($_SESSION['carrinho']);
-										unset($_SESSION['qnt']);
-
-										echo "<script>
-											alert('Compra finalizada!!');
-											location.href = 'cart.php';
-										</script>";
-									} else {
-										echo "<script>
-											alert('Erro!!');
-											location.href = 'cart.php';
-										</script>";
-									}
+											echo "<script>
+												alert('Compra finalizada!!');
+												location.href = 'cart.php';
+											</script>";
+										} else {
+											echo "<script>
+												alert('Erro!!');
+												location.href = 'cart.php';
+											</script>";
+										}
 								}
 
 							?>

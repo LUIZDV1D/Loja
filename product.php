@@ -132,7 +132,7 @@ if ($_SESSION['nomeu']) {
 							</li>
 
 							<li>
-								<a href="about.html">Sobre</a>
+								<a href="about.php">Sobre</a>
 							</li>
 
 							<li>
@@ -237,7 +237,7 @@ if ($_SESSION['nomeu']) {
 
 									<li class="header-cart-item">
 										<a href="?opc=apaga&id='.$prods["id"].'">
-											<div class="header-cart-item-img">
+											<div style="width: 80px; height: 100px;" class="header-cart-item-img">
 												<img src="admin/dist/img/'.$prods["imagem"].'" alt="IMG">
 											</div>
 										</a>
@@ -550,8 +550,9 @@ if ($_SESSION['nomeu']) {
 													<img src="admin/dist/img/'.$dados["imagem"].'" alt="IMG-PRODUCT">
 
 													<div class="block2-overlay trans-0-4">
-														<a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
+														<a href="" class="block2-btn-addwishlist hov-pointer trans-0-4">
 															<i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
+
 															<i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
 														</a>
 
@@ -815,14 +816,14 @@ if ($_SESSION['nomeu']) {
 		$('.block2-btn-addcart').each(function(){
 			var nameProduct = $(this).parent().parent().parent().find('.block2-name').html();
 			$(this).on('click', function(){
-				swal(nameProduct, "is added to cart !", "success");
+				swal(nameProduct, "Adicionado ao carrinho!", "success");
 			});
 		});
 
 		$('.block2-btn-addwishlist').each(function(){
 			var nameProduct = $(this).parent().parent().parent().find('.block2-name').html();
 			$(this).on('click', function(){
-				swal(nameProduct, "is added to wishlist !", "success");
+				swal(nameProduct, "Adicionado à lista de desejos!", "success");
 			});
 		});
 	</script>

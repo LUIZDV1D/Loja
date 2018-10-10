@@ -2,6 +2,8 @@
 
 error_reporting(0);
 
+session_start();
+
 unset($_SESSION['nomeu']);
 unset($_SESSION['carrinho']);
 unset($_SESSION['emailu']);

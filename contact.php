@@ -140,7 +140,7 @@ if ($_SESSION['nomeu']) {
 							</li>
 
 							<li>
-								<a href="about.html">Sobre</a>
+								<a href="about.php">Sobre</a>
 							</li>
 
 							<li class="sale-noti">
