@@ -2,7 +2,9 @@
 <html>
 <head>
 	<title>Cadastrar</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="dist/css/bootstrap.min.css">
+
 </head>
 <body>
 <br><br>
@@ -20,24 +22,27 @@
 		</tr>
 	</thead>
 
-	<tbody>
-		<?php
-			$sql = "SELECT * FROM contato";
-			$query = mysqli_query($conexao, $sql);
+	<tbody id="tab">
 
-			if (mysqli_num_rows($query) > 0) {
-				while ($dados = mysqli_fetch_assoc($query)) {
+		<?php
+			
+			$sql_ti = "SELECT * FROM contato";
+			$query_ti = mysqli_query($conexao, $sql_ti);
+
+			if (mysqli_num_rows($query_ti) > 0) {
+				while ($dados_ti = mysqli_fetch_assoc($query_ti)) {
 					echo "<tr>
-						<td>".$dados['id']."</td>
-						<td>".$dados['nome']."</td>
-						<td>".$dados['numero']."</td>
-						<td>".$dados['email']."</td>
-						<td>".$dados['assunto']."</td>
-						<td><a href='verM.php?id=".$dados['id']."''><i class='fa fa-eye'></i></a> | <a href='apagaM.php?id=".$dados['id']."'><i style='color: red;' class='fa fa-trash'></i></a></td>
+						<td>".$dados_ti['id']."</td>
+						<td>".$dados_ti['nome']."</td>
+						<td>".$dados_ti['numero']."</td>
+						<td>".$dados_ti['email']."</td>
+						<td>".$dados_ti['assunto']."</td>
+						<td><a href='apagaM.php?id=".$dados_ti['id']."'><i style='color: red;' class='fa fa-trash'></i></a></td>
 					</tr>";
 				}
 			}
 		?>
+		
 	</tbody>
 
 </table>

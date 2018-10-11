@@ -4,5 +4,10 @@
     $query = mysqli_query($conexao, $sql);
     $numN = mysqli_num_rows($query);
 
-     echo $numN;
+     if ($numN > 0) {
+     	echo $numN;
+     } else {
+     	echo "0";
+     }
+ ?>
                   

@@ -1,7 +1,7 @@
 	<?php
 	session_start();
 	error_reporting(0);
-	if(!empty($_POST['user'])){
+	if(isset($_POST['user'])){
 
 		require("config.php");
 
